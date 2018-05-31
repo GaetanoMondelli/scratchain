@@ -16,7 +16,7 @@ class Block{
             Data        : ${this.data}`;       
     }
 
-    static build_genesis(timestamp='0', current_hash="scratchcain"){
+    static build_genesis(timestamp='0', current_hash="G3N3SYS-BL0CK-5CR47CH41N"){
         return new this(timestamp, "NONE", current_hash , [])
     }
 

@@ -1,0 +1,24 @@
+{
+  "name": "scratchain",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watchAll",
+    "block_tests": "nodemon block_tests",
+    "start": "node ./app",
+    "dev": "nodemon ./app"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^23.0.0",
+    "js-sha256": "^0.9.0",
+    "nodemon": "^1.17.5"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3"
+  }
+}
