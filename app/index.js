@@ -19,6 +19,7 @@ app.get('/scratchain/blockarray', (req, res) => {
 app.post('/scratchchain/addblock', (req, res) => {
     const new_block = blockchain.add_block(req.body.data)
     console.log(`Added ${new_block}`)
+    p2p_server.synchronize()
     res.redirect('/scratchain/blockarray')
 })
 

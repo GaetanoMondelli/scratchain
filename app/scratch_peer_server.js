@@ -11,9 +11,9 @@ class ScratchPeerServer {
 
     connect_socket(socket){
         this.sockets.push(socket)
-        console.log(`ScratchBuddy connected ${socket}`)
-        this.messageHandler(socket)
-        socket.send(JSON.stringify(this.blockchain.block_array))
+        console.log(`ScratchBuddy connected ${this.sockets.length}`)
+        this.message_handler(socket)
+        this.send_block_array(socket)
     }
 
     listen() {
@@ -31,12 +31,20 @@ class ScratchPeerServer {
         })
     }
     
-    messageHandler(socket){
+    send_block_array(socket){
+        socket.send(JSON.stringify(this.blockchain.block_array))
+    }
+
+    message_handler(socket){
             socket.on('message', message => {
-                const data = JSON.parse(message);
-                console.log('data:', data)
+                const candidate_block_array = JSON.parse(message);
+                this.blockchain.replace_block_array(candidate_block_array)
             })
-        }           
+    }
+    
+    synchronize(){
+        this.sockets.forEach(socket => { this.send_block_array(socket) })
+    }
 }
 
 module.exports = ScratchPeerServer

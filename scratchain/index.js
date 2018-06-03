@@ -35,7 +35,7 @@ class Scratchain{
         return true
     }
 
-    replaceChain(longer_block_array){
+    replace_block_array(longer_block_array){
         if (longer_block_array.length <= this.block_array){
             return false
         }
