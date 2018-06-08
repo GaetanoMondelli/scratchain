@@ -1,5 +1,5 @@
-var fs = require('fs');
-path = require('path'),    
+const fs = require('fs');
+const path = require('path'),    
 
 config_path = path.join(__dirname, 'configuration.json');
 

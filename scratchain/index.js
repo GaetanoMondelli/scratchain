@@ -2,8 +2,9 @@ const Block = require('./block')
 
 class Scratchain{
     
-    constructor(){
-        this.block_array = [Block.build_genesis()]
+    constructor(config){
+        this.config = config
+        this.block_array = [Block.build_genesis(config)]
     }
 
     get_last_block(){
@@ -12,13 +13,13 @@ class Scratchain{
 
     add_block(data) {
         const last_block = this.get_last_block()
-        const block = Block.mine_block(last_block, data)
+        const block = Block.mine_block(last_block, data, last_block.difficulty)
         this.block_array.push(block)
         return block
     }
 
     is_valid_blockchain(block_array){
-        if(JSON.stringify(block_array[0]) !== JSON.stringify(Block.build_genesis())){
+        if(JSON.stringify(block_array[0]) !== JSON.stringify(Block.build_genesis(this.config))){
             return false
         }
 

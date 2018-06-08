@@ -4,14 +4,23 @@ const Scratchain =  require('./index')
 describe('Scratchain', () =>{
     let blockchain, other_blockchain, data
 
+    var mock_config = {
+        "GENESIS":      "G3N3SYS-BL0CK-5CR47CH41N",
+        "NONE":         "NONE",
+        "ORIGIN":       0,
+        "DIFFICULTY":   7,
+        "MINE_RATE":    300
+    }
+
     beforeEach(() => {
+
         data = "data"
-        blockchain = new Scratchain()
-        other_blockchain = new Scratchain()
+        blockchain = new Scratchain(mock_config)
+        other_blockchain = new Scratchain(mock_config)
     })
 
     it('starts with scratchain genesis block', ()=> {
-        expect(blockchain.block_array[0]).toEqual(Block.build_genesis())
+        expect(blockchain.block_array[0]).toEqual(Block.build_genesis(mock_config))
     })
 
     it('adds a new block', () => {

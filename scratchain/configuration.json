@@ -1,3 +1,7 @@
 {
-    "DIFFICULTY" : 1
+    "GENESYS":      "G3N3SYS-BL0CK-5CR47CH41N",
+    "NONE":         "NONE",
+    "ORIGIN":       0,
+    "DIFFICULTY":   2,
+    "MINE_RATE":    300
 }
