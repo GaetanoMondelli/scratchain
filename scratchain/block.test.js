@@ -17,4 +17,9 @@ describe('Block', () => {
     it(`sets the 'back hashpointer' to match the hash of the last block`, ()=> {
         expect(block.back_hash_pointer).toEqual(last_block.current_hash)
     } )
+    
+    it(`it calculates the hash that match the configured difficulty`, ()=> {
+        expect(block.current_hash.substring(0,6)).toEqual('0'.repeat(block.difficulty))
+    } )
+
 } )

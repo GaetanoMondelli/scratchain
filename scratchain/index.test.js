@@ -31,7 +31,6 @@ describe('Scratchain', () =>{
 
     it('validates a valid blockchain', ()=> {
         other_blockchain.add_block(data)
-
         expect(blockchain.is_valid_blockchain(other_blockchain.block_array)).toBe(true)
     })
 
@@ -51,7 +50,7 @@ describe('Scratchain', () =>{
     it('replaces the block array with a valid longer block array', () =>{
         other_blockchain.add_block('new block')
         
-        blockchain.replaceChain(other_blockchain.block_array)
+        blockchain.replace_block_array(other_blockchain.block_array)
 
         expect(other_blockchain.block_array).toEqual(blockchain.block_array)
     })
@@ -60,7 +59,7 @@ describe('Scratchain', () =>{
         other_blockchain.add_block('new wrong block')
         other_blockchain.get_last_block().data = "corrupted data"
 
-        blockchain.replaceChain(other_blockchain.block_array)
+        blockchain.replace_block_array(other_blockchain.block_array)
 
         expect(other_blockchain.block_array).not.toEqual(blockchain.block_array)
     })
