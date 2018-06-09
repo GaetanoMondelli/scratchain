@@ -32,6 +32,8 @@ describe('Block', () => {
     } )
 
     it(`it adjusts the difficulty with respect to the mine rate`, ()=>{
-        expect(block.current_hash)
+        expect(Block.adjust_difficulty(block, block.timestamp + block.mine_rate + 1 )).toBe(block.difficulty - 1)
+        expect(Block.adjust_difficulty(block, block.timestamp + block.mine_rate)).toBe(block.difficulty + 1)
+        expect(Block.adjust_difficulty(block, block.timestamp + block.mine_rate - 1 )).toBe(block.difficulty + 1)
     } )
 } )

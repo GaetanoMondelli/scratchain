@@ -8,7 +8,7 @@ class Block{
         this.nonce = nonce
         this.data = data
         this.difficulty = difficulty
-        this.mine_rate = this.mine_rate
+        this.mine_rate = mine_rate
     }
 
     toString(){
@@ -80,9 +80,9 @@ class Block{
     static adjust_difficulty(lastBlock, current_timestamp){
         let { timestamp, difficulty } = lastBlock
         if ( (current_timestamp - timestamp) > lastBlock.mine_rate){
-            return difficulty + 1
+            return difficulty - 1
         }        
-        return difficulty - 1
+        return difficulty + 1
     }
 }
 
