@@ -27,8 +27,11 @@ describe('Block', () => {
         expect(block.back_hash_pointer).toEqual(last_block.current_hash)
     } )
 
-    it(`it calculates the hash that match the configured difficulty`, ()=> {
+    it(`it calculates the hash that matches the configured difficulty`, ()=> {
         expect(block.current_hash).toContain('0'.repeat())
     } )
 
+    it(`it adjusts the difficulty with respect to the mine rate`, ()=>{
+        expect(block.current_hash)
+    } )
 } )

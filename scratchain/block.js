@@ -1,14 +1,14 @@
 const sha256 = require('js-sha256').sha256
-const { config } = require('./config') // move to blockchain (index.js)
 
 class Block{
-    constructor(timestamp, back_hash_pointer, current_hash, nonce, difficulty, data){
+    constructor(timestamp, back_hash_pointer, current_hash, nonce, difficulty, mine_rate, data){
         this.timestamp = timestamp
         this.back_hash_pointer = back_hash_pointer
         this.current_hash = current_hash
         this.nonce = nonce
         this.data = data
         this.difficulty = difficulty
+        this.mine_rate = this.mine_rate
     }
 
     toString(){
@@ -23,7 +23,7 @@ class Block{
     }
 
     static build_genesis(config){
-        return new this(config.ORIGIN, config.NONE, config.GENESIS , 0, config.DIFFICULTY, config.NONE)
+        return new this(config.ORIGIN, config.NONE, config.GENESIS , 0, config.DIFFICULTY, config.MINE_RATE, config.NONE)
     }
 
     static matching_hash(hash, difficulty){
@@ -61,11 +61,11 @@ class Block{
 
     static mine_block(lastBlock, data){
         const back_hash_pointer = lastBlock.current_hash
-        const { difficulty, timestamp } = lastBlock 
+        const { difficulty, timestamp, mine_rate } = lastBlock 
         const nonce = this.bruteforce_nonce(timestamp, back_hash_pointer, difficulty, data)
         const hash = this.block_hash_sha256(timestamp, back_hash_pointer, nonce, difficulty, data)
 
-        return new this(timestamp, back_hash_pointer, hash, nonce, difficulty, data)
+        return new this(timestamp, back_hash_pointer, hash, nonce, difficulty, mine_rate, data)
     }
 
     static block_hash_sha256(timestamp, back_hash_pointer, nonce, difficulty, data){
@@ -75,6 +75,14 @@ class Block{
     static block_hash(block){
         const {timestamp, back_hash_pointer, nonce, difficulty, data} = block
         return this.block_hash_sha256(timestamp, back_hash_pointer, nonce, difficulty, data) 
+    }
+
+    static adjust_difficulty(lastBlock, current_timestamp){
+        let { timestamp, difficulty } = lastBlock
+        if ( (current_timestamp - timestamp) > lastBlock.mine_rate){
+            return difficulty + 1
+        }        
+        return difficulty - 1
     }
 }
 
