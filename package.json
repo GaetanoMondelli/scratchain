@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll",
+    "test": "jest --detectOpenHandles",
+    "dev-test": "jest --watchAll",
     "block_tests": "nodemon block_tests",
     "start": "node ./app",
     "dev": "nodemon ./app"
